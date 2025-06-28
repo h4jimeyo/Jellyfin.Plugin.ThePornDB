@@ -258,7 +258,7 @@ namespace ThePornDB.Providers
                         continue;
                     }
 
-                    result.People.Add(actor);
+                    result.People.Append(actor);
                 }
 
                 foreach (var direcorLink in sceneData.Directors)
@@ -273,7 +273,7 @@ namespace ThePornDB.Providers
 #endif
                     };
 
-                    result.People.Add(director);
+                    result.People.Append(director);
                 }
             }
 

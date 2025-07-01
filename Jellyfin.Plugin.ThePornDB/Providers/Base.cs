@@ -292,7 +292,6 @@ namespace ThePornDB.Providers
                     {
                         result.AddPerson(otherPeople);
                     }
-
                 }
 
                 if (Plugin.Instance.Configuration.UseCustomTitle && !string.IsNullOrEmpty(Plugin.Instance.Configuration.CustomTitle))

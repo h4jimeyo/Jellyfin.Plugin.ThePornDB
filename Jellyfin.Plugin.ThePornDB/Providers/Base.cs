@@ -287,16 +287,17 @@ namespace ThePornDB.Providers
                         .ThenBy(o => o.Role?.Equals("Male", StringComparison.OrdinalIgnoreCase))
                         .ThenBy(o => o.Name)
                         .ToList();
-                    var others = other.OrderBy(o => o.Name).ToList();
+
                     foreach (var peopl in peoples)
                     {
                         result.AddPerson(peopl);
                     }
 
-                    foreach (var otherPeople in others)
-                    {
-                        result.AddPerson(otherPeople);
-                    }
+                    // var others = other.OrderBy(o => o.Name).ToList();
+                    // foreach (var otherPeople in others)
+                    // {
+                    //     result.AddPerson(otherPeople);
+                    // }
                 }
 
                 if (Plugin.Instance.Configuration.UseCustomTitle && !string.IsNullOrEmpty(Plugin.Instance.Configuration.CustomTitle))

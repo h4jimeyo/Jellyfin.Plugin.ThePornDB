@@ -280,12 +280,19 @@ namespace ThePornDB.Providers
                     var people = result.People.Where(o => o.ProviderIds.ContainsKey(Plugin.Instance.Name) && !string.IsNullOrEmpty(o.ProviderIds[Plugin.Instance.Name]));
                     var other = result.People.Where(o => !o.ProviderIds.ContainsKey(Plugin.Instance.Name) || string.IsNullOrEmpty(o.ProviderIds[Plugin.Instance.Name]));
 
-                    result.People = [ .. people
+                    result.People = people
                         .DistinctBy(o => o.ProviderIds[Plugin.Instance.Name], StringComparer.OrdinalIgnoreCase)
                         .OrderBy(o => o.Type)
                         .ThenBy(o => string.IsNullOrEmpty(o.Role))
                         .ThenBy(o => o.Role?.Equals("Male", StringComparison.OrdinalIgnoreCase))
-                        .ThenBy(o => o.Name), .. other.OrderBy(o => o.Name)];
+                        .ThenBy(o => o.Name)
+                        .ToList();
+                    var others = other.OrderBy(o => o.Name).ToList();
+                    foreach (var otherPeople in others)
+                    {
+                        result.AddPerson(otherPeople);
+                    }
+
                 }
 
                 if (Plugin.Instance.Configuration.UseCustomTitle && !string.IsNullOrEmpty(Plugin.Instance.Configuration.CustomTitle))
